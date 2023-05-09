@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Student__c</object>
+            </objects>
+        </targetConfig>
+    </targetConfigs>
+    <masterDefinition>
+        <component>
+            <description>This component will allow users to edit Student records such as student name, student ID, and student grade.</description>
+            <design>
+                <topics>
+                    <topic>Student</topic>
+                    <topic>Edit</topic>
+                </topics>
+            </design>
+            <resources>
+                <resource>
+                    <field>StudentController.cls</field>
+                    <description>Apex controller for Student data updates.</description>
+                </resource>
+            </resources>
+        </component>
+    </masterDefinition>
+    <auraDefinitionBundles>
+        <auraDefinitionBundle>
+            <description>StudentEditLWC</description>
+            <targets>
+                <target>lightning__RecordPage</target>
+            </targets>
+            <targetConfigs>
+                <targetConfig targets="lightning__RecordPage">
+                    <objects>
+                        <object>Student__c</object>
+                    </objects>
+                </targetConfig>
+            </targetConfigs>
+            <components>
+                <component>
+                    <description>StudentEditLWC</description>
+                    <metadata>
+                        <aura:dependency resource="markup://force:recordEdit"/>
+                    </metadata>
+                    <controller>StudentController</controller>
+                    <model>
+                        <Student>
+                            <fields>
+                                <Student_Name>Student_Name__c</Student_Name>
+                                <Student_ID>Student_ID__c</Student_ID>
+                                <Student_Grade>Student_Grade__c</Student_Grade>
+                            </fields>
+                        </Student>
+                    </model>
+                </component>
+            </components>
+        </auraDefinitionBundle>
+    </auraDefinitionBundles>
+</LightningComponentBundle>
